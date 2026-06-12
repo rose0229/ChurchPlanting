@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rock Point Church — Digital Presence Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#05171e;        /* near-black teal */
+  --ink2:#15171e;
+  --red:#ed4144;        /* Rock Point red */
+  --red-d:#c9302f;
+  --paper:#ffffff;
+  --soft:#f7f7f7;
+  --soft2:#eef0f1;
+  --line:#e1e4e6;
+  --muted:#6f6f6f;
+  --good:#2f8f57;
+  --warn:#c98a1e;
+  --bad:#cf3b34;
+  --display:'Montserrat',system-ui,sans-serif;
+  --body:'Roboto',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.62;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 28px}
+h1,h2,h3,h4,.display{font-family:var(--display);line-height:1.08;letter-spacing:.005em}
+p{margin:0 0 14px}
+a{color:var(--red-d);text-decoration:none;border-bottom:1px solid #f0b8b8}
+strong{font-weight:700}
+small{color:var(--muted)}
+
+/* Cover */
+.cover{background:var(--ink);color:#eef2f4;padding:96px 28px 84px;text-align:center;position:relative}
+.cover .lockup{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.14em;font-size:30px;color:#fff}
+.cover .lockup .dot{color:var(--red)}
+.cover .rule{width:60px;height:5px;background:var(--red);margin:24px auto}
+.cover .kicker{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.36em;font-size:13px;color:var(--red);margin-top:4px}
+.cover h1{font-size:52px;font-weight:900;margin:16px auto 10px;max-width:15ch;color:#fff;text-transform:uppercase;letter-spacing:.01em}
+.cover .tag{font-style:italic;color:#b9c3c7;font-size:18px;font-family:var(--body)}
+.cover .meta{margin-top:32px;font-size:13.5px;color:#9fb0b5;letter-spacing:.02em}
+.grade-badge{display:inline-block;margin-top:28px;background:var(--red);color:#fff;font-family:var(--display);font-weight:900;padding:14px 28px;border-radius:4px}
+.grade-badge .g{font-size:46px;line-height:1;display:block}
+.grade-badge .l{font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-top:5px;font-weight:700}
+
+section{padding:46px 0 8px}
+.sec-num{font-family:var(--display);font-weight:800;color:var(--red);font-size:13px;letter-spacing:.22em;text-transform:uppercase}
+h2.sec{font-size:30px;font-weight:800;text-transform:uppercase;margin:6px 0 4px;border-bottom:3px solid var(--ink);padding-bottom:12px}
+h3{font-size:20px;font-weight:700;margin:30px 0 8px;color:var(--ink)}
+h4{font-size:14.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin:20px 0 6px;color:var(--ink)}
+.lead{font-size:18px;color:#2c3a40}
+
+.gradechip{display:inline-block;background:var(--ink);color:#fff;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;padding:5px 13px;border-radius:3px;text-transform:uppercase}
+.gradechip.a{background:#2f7d4f}.gradechip.b{background:#3f7d8c}.gradechip.c{background:#b07d27}
+
+.box{background:var(--soft);border:1px solid var(--line);border-left:5px solid var(--red);padding:16px 18px;margin:16px 0;border-radius:4px}
+.box.rewrite{background:#fff;border-left-color:var(--ink)}
+.box h4{margin-top:0}
+.quote{background:var(--soft2);border-left:5px solid var(--ink);padding:12px 16px;margin:14px 0;font-style:italic;color:#2c3a40;border-radius:4px}
+.flag{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:3px;color:#fff;white-space:nowrap}
+.f-good{background:var(--good)}.f-bad{background:var(--bad)}.f-warn{background:var(--warn)}.f-rec{background:var(--ink)}
+
+.assess{margin:12px 0}
+.assess .row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.assess .row:last-child{border-bottom:0}
+.assess .k{flex:0 0 158px;font-family:var(--display);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink);padding-top:2px}
+.assess .v{flex:1}
+
+ul,ol{margin:6px 0 16px;padding-left:22px}
+li{margin:5px 0}
+
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:12px;background:var(--ink);color:#fff}
+tbody tr:nth-child(even){background:var(--soft)}
+.score{font-family:var(--display);font-weight:800;text-align:center;font-size:16px}
+.s-hi{color:var(--good)}.s-mid{color:var(--warn)}.s-lo{color:var(--bad)}
+td.cell-hi{background:#e2f1e8!important}td.cell-mid{background:#f7ecd5!important}td.cell-lo{background:#f7dcd9!important}
+
+.kpi{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.kpi div{flex:1;min-width:150px;background:var(--ink);color:#fff;border-radius:6px;padding:14px 16px}
+.kpi .n{font-family:var(--display);font-weight:900;font-size:26px;color:#fff}
+.kpi .n .u{color:var(--red)}
+.kpi .t{font-size:12px;color:#9fb0b5;text-transform:uppercase;letter-spacing:.06em}
+
+.toc{columns:2;column-gap:34px;font-size:14px;margin-top:10px}
+.toc a{display:block;border:0;color:#2c3a40;padding:3px 0}
+.toc a:hover{color:var(--red-d)}
+
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+footer{background:var(--ink);color:#9fb0b5;text-align:center;padding:40px 28px;margin-top:50px}
+footer .lockup{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.14em;color:#fff;font-size:18px}
+footer .dot{color:var(--red)}
+
+@page{ size:Letter; margin:0; }
+@media print{
+  .wrap{max-width:none;padding:0 0.7in}
+  .cover{padding:1.15in 0.7in 1in;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+  section{padding:0.5in 0 0}
+  .no-print{display:none}
+  h2.sec,h3,h4{page-break-after:avoid}
+  table,.box,.quote,.kpi{page-break-inside:avoid}
+  .pagebreak{page-break-before:always}
+  .cover{page-break-after:always}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="lockup">Rock Point Church<span class="dot">.</span></div>
+  <div class="rule"></div>
+  <div class="kicker">Digital Presence Audit</div>
+  <h1>The Honest Audit</h1>
+  <div class="tag">“Pointing people to Jesus by loving them like Jesus.”</div>
+  <div class="grade-badge"><span class="g">B+</span><span class="l">Overall Grade</span></div>
+  <div class="meta">Prepared June 10, 2026 &nbsp;•&nbsp; Queen Creek, Arizona &nbsp;•&nbsp; rockpointchurch.com<br>
+  Scope: website, sermon, YouTube, Instagram, Facebook, TikTok, podcast, brand, guest journey &amp; local positioning</div>
+</div>
+
+<div class="wrap">
+
+<!-- SCOPE -->
+<section id="scope">
+  <div class="sec-num">How this audit was produced</div>
+  <h2 class="sec">Scope &amp; Sources</h2>
+  <p class="lead">This is a candid, outside-in review of Rock Point’s public digital presence — written as if I were a first-time guest, a skeptic, a young parent, and a competing church all at once. It is not flattery. Rock Point is a large, healthy, well-run church; the job here is to find the specific places where the <em>digital</em> presence is smaller, slower, or less clear than the church itself.</p>
+  <p><strong>What I reviewed:</strong> the live website (home, What to Expect, About, Mission &amp; Beliefs, Next Steps, ministries); the brand system pulled directly from the site’s own CSS (colors and typefaces); the YouTube channel (10.6K subscribers, 793 videos, full-service view counts, titles, tabs); two current weekend messages and the official series framing; the Instagram, TikTok, and Facebook profiles; and the podcast on Spotify and Apple. Local positioning was assessed against the East Valley church market.</p>
+  <p><strong>What I could not fully access (stated plainly):</strong> a complete verbatim sermon transcript could not be pulled — captions are <em>disabled</em> on some weekend uploads (e.g., “Never Enough | Week 1”), and the transcript panel/caption feed would not render for the current series. The sermon section therefore critiques the church’s <em>stated</em> big ideas (which are quotable from the official video descriptions), the preaching texts, the series arc, the service structure, and packaging — not line-by-line delivery. Instagram/TikTok/Facebook feeds are partly login-walled, so post-level engagement was assessed at the profile and sample level. Where a claim couldn’t be verified, it is flagged in the text.</p>
+  <div class="box no-print">
+    <strong>Reading the grades:</strong> each area carries its own letter grade; the scorecard (Section 12) rates 20 dimensions 1–10 (average 7.1). Rock Point grades well — the value of this report is in the specific gaps between a 5,500-person church and a few hundred-view digital footprint.
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="no-print" id="toc">
+  <div class="sec-num">Contents</div>
+  <h2 class="sec">What’s Inside</h2>
+  <nav class="toc">
+    <a href="#exec">1 · Executive Summary</a>
+    <a href="#website">2 · Website Audit</a>
+    <a href="#sermon">3 · Sermon Audit</a>
+    <a href="#youtube">4 · YouTube Audit</a>
+    <a href="#social">5 · Social Media Audit</a>
+    <a href="#brand">6 · Brand &amp; Messaging</a>
+    <a href="#guest">7 · Guest Journey</a>
+    <a href="#ministry">8 · Ministry Pathway</a>
+    <a href="#tone">9 · Theological &amp; Pastoral Tone</a>
+    <a href="#design">10 · Design &amp; Visual</a>
+    <a href="#local">11 · Local Positioning</a>
+    <a href="#matrix">12 · Scoring Matrix</a>
+    <a href="#leverage">13 · Highest-Leverage Fixes</a>
+    <a href="#copy">14 · Copywriting Rewrites</a>
+    <a href="#content">15 · 90-Day Content Strategy</a>
+    <a href="#final">16 · Final Diagnosis</a>
+  </nav>
+</section>
+
+<!-- 1. EXEC -->
+<section id="exec" class="pagebreak">
+  <div class="sec-num">Section 1</div>
+  <h2 class="sec">Executive Summary</h2>
+  <p class="lead">Rock Point is a large, established, genuinely impressive church with a digital presence that is good — but smaller and more cluttered than it should be for its size. The problem isn’t quality or care. It’s reach and clarity: a 5,500-person church is being seen by a few hundred people per sermon, and its “next steps” read like a directory instead of a path.</p>
+
+  <div class="kpi">
+    <div><div class="n">~5,500</div><div class="t">Weekend attendance</div></div>
+    <div><div class="n">200–985</div><div class="t">Views · recent sermons</div></div>
+    <div><div class="n">17K</div><div class="t">Instagram followers</div></div>
+    <div><div class="n">1,386</div><div class="t">TikTok followers</div></div>
+  </div>
+
+  <h3>Overall grade: <span class="gradechip b">B+</span></h3>
+  <p>Strong fundamentals across the board (care ministries, website polish, brand, beliefs, Instagram, podcast). Held back in exactly two places: <strong>digital reach</strong> (YouTube/short-form) and <strong>conversion clarity</strong> (navigation and next steps).</p>
+
+  <h4>The 3 strongest things you’re doing</h4>
+  <ol>
+    <li><strong>A rare depth of care and trust signals.</strong> Special Needs ministry, Support &amp; Recovery, Counseling, a thorough beliefs page (“in essentials unity, in non-essentials liberty, in all things love”), an established 20-year reputation, real reviews. Very few churches communicate this much holistic care online — it’s a major credibility asset.</li>
+    <li><strong>A polished, comprehensive platform.</strong> A professional custom website, an excellent “What to Expect” (parking with flashers for guests, live in-person teaching, kids by age, communion explained), a healthy weekly podcast (full + “Message Only” cuts, 5.0★), and a strong Instagram (17K, clear bio with all five service times).</li>
+    <li><strong>A clear, repeatable identity.</strong> “We exist to point people to Jesus by loving them like Jesus” is one of the better mission lines in the category, and the “We Are Rock Point” theme (app, class, campaign, @wearerockpoint) gives the church a real sense of shared ownership.</li>
+  </ol>
+
+  <h4>The 3 weakest things holding you back</h4>
+  <ol>
+    <li><strong>Digital reach badly lags the church’s size.</strong> A ~5,500-attendance church gets <strong>200–985 views</strong> per weekend message, posts <strong>full 60–75-minute services</strong> as the default YouTube product, runs <strong>no YouTube Shorts</strong> (the channel has no Shorts tab), and has a <strong>neglected TikTok</strong> (1,386 followers vs 17K on Instagram).</li>
+    <li><strong>Next-steps overload.</strong> The Next Steps page is a flat wall of ~10 equally-weighted tiles, including <em>four</em> overlapping “get to know us / get committed” options — Newcomers’ Dinner, We Are Rock Point, Foundations, and Membership — with no sequence. And “Plan a Visit” isn’t even in the primary navigation.</li>
+    <li><strong>Self-inflicted clarity &amp; findability drags.</strong> Your home, About, and Next Steps pages all share the <em>identical</em> generic &lt;title&gt; (“Rock Point Church”) and meta-description, and core content (your mission statement) is baked into an image instead of live text — hurting both SEO and accessibility.</li>
+  </ol>
+
+  <h4>The biggest missed opportunity</h4>
+  <p>You already create the two best forms of discovery content every single weekend — <strong>“stories of life change”</strong> told live in services, and <strong>message-only audio</strong> — but you don’t turn them into short-form clips. A clip funnel (Shorts / Reels / TikTok → full message → plan a visit) would put a megachurch’s worth of content in front of the community that’s scrolling right past you.</p>
+
+  <h4>The first thing I’d fix</h4>
+  <p>Two moves: (1) add one obvious <strong>“Plan a Visit”</strong> button to the primary nav and collapse the next-steps wall into a simple sequenced path; (2) start cutting <strong>sermon clips</strong> and posting them as Shorts/Reels/TikTok. (Bonus 30-minute fix: unique titles + meta-descriptions per page.)</p>
+
+  <h4>The biggest risk if nothing changes</h4>
+  <p>National multisite brands — Central Christian, Christ’s Church of the Valley, Sun Valley — are planting Queen Creek campuses with slick digital funnels. If Rock Point keeps under-reaching online, it cedes the <em>first impression</em> and the next generation’s discovery to competitors, even though it’s the stronger, homegrown, live-teaching church. The room is full; the feed is quiet — and the feed is where the next family looks first.</p>
+</section>
+
+<!-- 2. WEBSITE -->
+<section id="website" class="pagebreak">
+  <div class="sec-num">Section 2</div>
+  <h2 class="sec">Website Audit</h2>
+  <p><span class="gradechip b">Website grade: B+</span></p>
+  <p class="lead">A professional, comprehensive, custom-built site (by Live Design) that does the hard things well — it just buries the two simplest things a guest needs: an obvious “Plan a Visit” button and a clear single next step. It’s a site built for a church that already knows it, more than for the stranger discovering it.</p>
+
+  <h3>First impression, through six sets of eyes</h3>
+  <div class="assess">
+    <div class="row"><div class="k">First-time guest</div><div class="v">Reassured once they reach “What to Expect” — but the primary nav offers “Times &amp; Location / About / Watch / Next Steps / Get Connected / Events / Give,” with no single “Plan a Visit.” <span class="flag f-warn">Friction</span></div></div>
+    <div class="row"><div class="k">Skeptic / unbeliever</div><div class="v">Welcomed warmly (“Come as you are! The hurting, the lost, the broken — everyone is welcome here”) and reassured by depth of beliefs. The “Say Yes to Jesus” page is a real on-ramp. <span class="flag f-good">Works</span></div></div>
+    <div class="row"><div class="k">Young family</div><div class="v">Very well served: Nursery–Pre-K, K–3, Preteen, Middle/High School, <em>and</em> a Special Needs ministry. This is a standout. <span class="flag f-good">Works</span></div></div>
+    <div class="row"><div class="k">New Christian</div><div class="v">Baptism, Say Yes to Jesus, Foundations, Classes all exist — but which comes first? The path isn’t sequenced. <span class="flag f-warn">Unclear</span></div></div>
+    <div class="row"><div class="k">Looking for community</div><div class="v">Groups, Classes, Volunteer, Support &amp; Recovery, Counseling — abundant. Almost too many doors at once. <span class="flag f-warn">Overload</span></div></div>
+    <div class="row"><div class="k">Comparing churches</div><div class="v">Polish and care beat most competitors. But generic page titles and full-service-only video weaken the head-to-head against slick multisite funnels. <span class="flag f-warn">Mixed</span></div></div>
+  </div>
+
+  <h3>Homepage, above-the-fold &amp; visual design</h3>
+  <p><span class="flag f-good">Works</span> A confident video hero, “Join us online or on campus,” all five service times, and a warm welcome paragraph (“the hurting, the lost, the broken — everyone is welcome here”). The design is current, bold, and on-brand (Montserrat + Rock Point red).</p>
+  <p><span class="flag f-bad">Doesn’t work</span> Two real problems: (1) the <strong>mission statement is an image</strong> (<code>RPC_missionstatement.png</code>) — invisible to search engines and screen readers; and (2) the above-the-fold leads with logistics and campaign/app promos rather than a single human hook + one primary action.</p>
+  <div class="box rewrite">
+    <h4>Replacement — homepage hero</h4>
+    <p><strong>Headline:</strong> You belong here.<br>
+    <strong>Subhead:</strong> Rock Point is a church in Queen Creek for people at every point — come as you are, online or on campus. Saturdays 3 &amp; 5pm · Sundays 8:30, 10 &amp; 11:30am.<br>
+    <strong>Buttons:</strong> [ Plan Your Visit ] &nbsp; [ Watch a Message ]<br>
+    <em>(Set the mission line as real text, not an image.)</em></p>
+  </div>
+
+  <h3>Navigation</h3>
+  <p><span class="flag f-warn">Overloaded</span> The mega-menu is enormous: “About” opens 8 links, “Next Steps” opens 9, “Get Connected” 6, “Watch” 3, plus Events, Give, Contact. It’s thorough, but it asks a newcomer to parse ~30 options. And the one link a guest most needs — <strong>Plan a Visit</strong> — is not a top-level item (it lives at <code>/plan-a-visit</code>, reachable mainly from the What-to-Expect page).</p>
+  <p><span class="flag f-rec">Fix</span> Promote a single <strong>Plan a Visit</strong> button (styled in red) to the top-level nav. Trim the mega-menu to: <strong>Plan a Visit · Watch · About · Ministries · Give</strong>, and let everything else live one level down.</p>
+
+  <h3>SEO &amp; local search</h3>
+  <p><span class="flag f-good">Works</span> Your meta-keywords target the right local terms (“queen creek church, churches in chandler az, gilbert churches”), and “What to Expect” has a unique, well-written title and description.</p>
+  <p><span class="flag f-bad">Doesn’t work</span> Your home page, About page, and Next Steps page all carry the <strong>identical</strong> &lt;title&gt; — just “Rock Point Church” — and the <strong>identical</strong> meta-description. Unique, descriptive titles are basic SEO hygiene, and several of your most important pages skip it.</p>
+  <div class="box rewrite">
+    <h4>Replacement — per-page titles &amp; descriptions</h4>
+    <p><strong>Home:</strong> Rock Point Church | A Church in Queen Creek, AZ — Saturdays &amp; Sundays<br>
+    <strong>About:</strong> About Rock Point Church | Our Mission, Beliefs &amp; Story | Queen Creek, AZ<br>
+    <strong>Next Steps:</strong> Next Steps at Rock Point | Baptism, Groups, Serving &amp; Membership</p>
+  </div>
+
+  <h3>Page-by-page</h3>
+  <table>
+    <thead><tr><th>Page</th><th>Verdict</th><th>The honest note</th></tr></thead>
+    <tbody>
+      <tr><td><strong>What to Expect</strong></td><td><span class="flag f-good">Strong</span></td><td>Excellent: 70-minute services, live in-person teaching (not video venue), guest parking via flashers, casual dress, kids by age, communion explained. Best page on the site.</td></tr>
+      <tr><td><strong>About / Beliefs</strong></td><td><span class="flag f-good">Strong</span></td><td>“Essentials/non-essentials/love” framing + detailed doctrine with biblical support and practical application. Thorough and trustworthy.</td></tr>
+      <tr><td><strong>Next Steps</strong></td><td><span class="flag f-bad">Cluttered</span></td><td>~10 equal tiles; four overlap (Newcomers’ Dinner, We Are Rock Point, Foundations, Membership). No “start here.”</td></tr>
+      <tr><td><strong>For Your Family</strong></td><td><span class="flag f-good">Strong</span></td><td>Kids, Youth, Young Adults, Special Needs — comprehensive and reassuring.</td></tr>
+      <tr><td><strong>Care / Recovery</strong></td><td><span class="flag f-good">Standout</span></td><td>Support &amp; Recovery + Counseling shown publicly — a rare, high-trust signal. Surface it more, not less.</td></tr>
+      <tr><td><strong>Plan a Visit</strong></td><td><span class="flag f-warn">Buried</span></td><td>The page exists but isn’t in the primary nav; guests must route through “Times &amp; Location.”</td></tr>
+      <tr><td><strong>Give</strong></td><td><span class="flag f-good">Fine</span></td><td>Church Center + “Why We Give.” Clear.</td></tr>
+      <tr><td><strong>Watch</strong></td><td><span class="flag f-warn">Hidden</span></td><td>Lives at <code>/archive/playlist-for</code>; full services are long; a casual viewer has nowhere short to start.</td></tr>
+      <tr><td><strong>Team</strong></td><td><span class="flag f-good">Fine</span></td><td>Pastor Bill Bush + team. Keep faces and short bios prominent.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Mobile, speed &amp; the “text-as-image” problem</h3>
+  <p>The site serves separate desktop/mobile hero videos (good). The recurring issue is <strong>important words rendered as images</strong> — the mission statement, menu graphics, and SVG “elements.” That’s invisible to Google and to screen readers, and it makes copy edits expensive. Convert headline copy to live, styled text.</p>
+
+  <h3>Website recommendations, in priority order</h3>
+  <ol>
+    <li>Promote <strong>Plan a Visit</strong> to the primary nav (red button); trim the mega-menu.</li>
+    <li>Rebuild <strong>Next Steps</strong> as a sequenced path (see Section 8), not a flat wall of tiles.</li>
+    <li>Write unique titles + meta-descriptions for home, About, and Next Steps.</li>
+    <li>Convert the mission statement (and other text-images) to live text.</li>
+    <li>Add a short, obvious “Watch a 2-minute clip” entry point on the homepage and Watch page.</li>
+  </ol>
+</section>
+
+<!-- 3. SERMON -->
+<section id="sermon" class="pagebreak">
+  <div class="sec-num">Section 3</div>
+  <h2 class="sec">Sermon Audit</h2>
+  <p><span class="gradechip b">Sermon ministry grade: B</span></p>
+  <p class="lead">Rock Point’s preaching is clear, contemporary, and built around strong, memorable big ideas — well-suited to a broad, mixed audience. The two things to watch are <em>textual depth</em> (topical series can drift from the text into the theme) and <em>digital packaging</em> (the message is buried 15+ minutes into a full-service upload almost no one finishes).</p>
+  <div class="box no-print"><strong>Access note:</strong> A full verbatim transcript wasn’t retrievable — captions are disabled on some uploads and the transcript feed wouldn’t render for the current series. This critique uses the church’s <em>own published</em> big-idea lines and chapter markers (quotable), the preaching texts, and the service structure, rather than line-by-line delivery. Treat the grade as provisional pending a full listen.</p></div>
+
+  <h3>Representative messages reviewed</h3>
+  <div class="assess">
+    <div class="row"><div class="k">Current series</div><div class="v">“Playlist For” — Week 1. Text: <strong>Psalm 1:1–6</strong> (read on stage). Sermon runs 15:43–56:33 (~41 min). 337 views.</div></div>
+    <div class="row"><div class="k">Stated big idea</div><div class="v">“Worship is the playlist for our battles and breakthroughs.”</div></div>
+    <div class="row"><div class="k">Prior series</div><div class="v">“Never Enough” — Week 1. Big idea (published): “Temporal things will never be enough for a heart made for eternity.” ~45-min message. 985 views.</div></div>
+    <div class="row"><div class="k">Preacher / format</div><div class="v">Pastor Bill Bush &amp; team; live in-person teaching; communion ~once per series.</div></div>
+  </div>
+
+  <h4>Strengths</h4>
+  <ul>
+    <li><strong>Clear, memorable, modern big ideas.</strong> “Temporal things will never be enough for a heart made for eternity” is a genuinely strong line — gospel-adjacent, sticky, and true to Ecclesiastes/Matthew 6. The theses do real work.</li>
+    <li><strong>Accessible to a mixed room.</strong> Topical, felt-need series (Never Enough, Vitals, True Grit, I·Me·Mine) meet people where they are — well-suited to a “come as you are” congregation and the unchurched.</li>
+    <li><strong>A strong narrative on-ramp.</strong> Each service builds with a “Story of Life Change,” a Scripture reading, and a video clip before the message — emotionally and biblically priming the room.</li>
+    <li><strong>Live teaching, not a video venue</strong> — confirmed on the site. That authenticity matters and differentiates from multisite competitors.</li>
+  </ul>
+
+  <h4>Weaknesses &amp; risks</h4>
+  <ul>
+    <li><strong>Topic-over-text risk.</strong> Launching a <em>worship</em> series (“Worship is the playlist for our battles and breakthroughs”) from <strong>Psalm 1</strong> is a potential stretch — Psalm 1 is about <em>delighting in and meditating on God’s Word</em> and the two ways, not worship per se. If the text becomes a springboard for the theme rather than the source of it, that’s a missed textual opportunity. (Flagged from the title/text pairing; confirm against the full message.)</li>
+    <li><strong>The message is buried for online viewers.</strong> On YouTube the default upload is the <em>full service</em> — announcements, three worship songs, a clip — so the teaching doesn’t begin until ~15–17 minutes in. A first-time online viewer almost never makes it there.</li>
+    <li><strong>Length for digital.</strong> 41–45-minute messages inside 70-minute uploads are fine in the room and long for the feed.</li>
+    <li><strong>Felt-need framing</strong> is a strength for accessibility but a risk for depth — without a visible text-driven structure, strong series themes can read as motivational. Make the text the spine, on screen, every week.</li>
+  </ul>
+
+  <div class="assess">
+    <div class="row"><div class="k">Best moment</div><div class="v">The “Never Enough” thesis itself — “temporal things will never be enough for a heart made for eternity” — is the kind of line that should be a clip, a graphic, and a series anchor.</div></div>
+    <div class="row"><div class="k">Weakest moment</div><div class="v">(Packaging) The 15-minute on-ramp before teaching on the public YouTube upload — invisible cost in lost viewers.</div></div>
+    <div class="row"><div class="k">Missed opportunity</div><div class="v">Not publishing the <em>message-only</em> cut as the primary YouTube product (you already make it for the podcast) and not clipping the best 60 seconds.</div></div>
+  </div>
+
+  <h4>One way to make it 20% better</h4>
+  <p>Make the preaching text visible and load-bearing: put the passage on screen, structure the message in 3 moves <em>from the text</em>, and restate the big idea verbatim at least three times so it travels. This also makes clipping trivial.</p>
+  <h4>One way to make it much stronger theologically</h4>
+  <p>Anchor each series’ theme in the text’s own logic. For a worship series, preach a worship psalm (Psalm 95, 100, or 150) or frame Psalm 1 honestly (delighting in the Word as the root of true worship) rather than retrofitting the theme onto the passage.</p>
+  <h4>One way to make it more compelling rhetorically</h4>
+  <p>Open the <em>message</em> (not the service) with a 20-second hook that can stand alone as a clip — a question, a story, or the big idea stated cold — then preach. That single habit fixes both the sermon open and your short-form pipeline.</p>
+
+  <div class="box rewrite">
+    <h4>Suggested improved big idea &amp; outline — a worship series done from the text</h4>
+    <p><strong>Big idea:</strong> “We don’t worship to feel better — we worship because God is worth it, and that’s what steadies us.”</p>
+    <p><strong>Outline (Psalm into worship):</strong> 1) What captures your attention shapes your life (Ps 1 — what you “meditate on”). 2) Worship re-points attention to God. 3) Worship in the battle (a lament psalm). 4) Worship in the breakthrough (a praise psalm). The theme <em>grows from</em> the texts instead of being imposed on one.</p>
+  </div>
+
+  <p><strong>Bottom line:</strong> strong, clear, accessible preaching reaching only a few hundred online. The highest-return sermon move isn’t homiletical — it’s publishing the message-only cut and clipping it.</p>
+</section>
+
+<!-- 4. YOUTUBE -->
+<section id="youtube" class="pagebreak">
+  <div class="sec-num">Section 4</div>
+  <h2 class="sec">YouTube Audit</h2>
+  <p><span class="gradechip c">YouTube grade: C+</span></p>
+  <p class="lead">A big library (793 videos) and a real subscriber base (10.6K) producing surprisingly small per-video reach (200–985 views). The channel is run like a livestream archive, not a discovery platform — full services by default, no Shorts, and titles that tell you the week number but not the topic.</p>
+
+  <div class="kpi">
+    <div><div class="n">10.6K</div><div class="t">Subscribers</div></div>
+    <div><div class="n">793</div><div class="t">Videos</div></div>
+    <div><div class="n">200–985</div><div class="t">Views · recent messages</div></div>
+    <div><div class="n">0</div><div class="t">Shorts (no Shorts tab)</div></div>
+  </div>
+
+  <h3>What the data says</h3>
+  <p>Recent uploads are full services 60–78 minutes long: “Playlist For | Week 3” (208 views), “Never Enough | Week 1” (985 — the recent high), Easter 2026 (594), Christmas 2025 (422). For a ~5,500-attendance church with 10.6K subscribers, weekend messages drawing a few hundred views means the channel is reaching a fraction even of the people already in the room.</p>
+
+  <h3>Assessment</h3>
+  <div class="assess">
+    <div class="row"><div class="k">Branding / About</div><div class="v">Clean logo + banner; About states the mission and links the site. Solid. <span class="flag f-good">OK</span></div></div>
+    <div class="row"><div class="k">Titles</div><div class="v">“[Series] | Week X | Full Service” — tells regulars the week, tells strangers nothing. No topic, no felt-need, no speaker. <span class="flag f-bad">Weak</span></div></div>
+    <div class="row"><div class="k">Default product</div><div class="v">Full 60–78-min services. The teaching is buried ~15 min in. Message-only cuts exist on the podcast but rarely lead on YouTube. <span class="flag f-bad">Weak</span></div></div>
+    <div class="row"><div class="k">Shorts</div><div class="v">None — the channel has no Shorts tab, despite the church making vertical clips for TikTok/Reels. <span class="flag f-bad">Missing</span></div></div>
+    <div class="row"><div class="k">Chapters</div><div class="v">Present (good!) but worship-song-oriented, not topic-discovery. <span class="flag f-warn">Half-credit</span></div></div>
+    <div class="row"><div class="k">Captions</div><div class="v">Inconsistent — disabled on some uploads. Hurts accessibility and search. <span class="flag f-bad">Weak</span></div></div>
+    <div class="row"><div class="k">First-time-viewer pull</div><div class="v">A stranger landing on a 75-minute service with a week-number title has little reason to stay. <span class="flag f-bad">Weak</span></div></div>
+  </div>
+
+  <h3>Specific, do-this feedback</h3>
+  <h4>Title formulas to use</h4>
+  <ul>
+    <li><strong>Topic + felt need:</strong> “Why Nothing Ever Feels Like Enough | Never Enough” (instead of “Never Enough | Week 1 | Full Service”).</li>
+    <li><strong>Question:</strong> “Can Worship Actually Change a Hard Week? | Psalm 1.”</li>
+    <li>Lead with the message-only cut: “…(Message) | Rock Point Church.” Keep full services as a secondary upload.</li>
+  </ul>
+  <h4>Thumbnails</h4>
+  <ul><li>Keep the strong series art, but add a 2–4 word Montserrat hook (“NEVER ENOUGH”) + the pastor’s face on message uploads. Consistency + a human face lifts click-through.</li></ul>
+  <h4>Description template</h4>
+  <div class="box rewrite">
+    <p>One-line hook (the published big idea, e.g. “Temporal things will never be enough for a heart made for eternity.”)<br>
+    → New here? Plan a visit: rockpointchurch.com/plan-a-visit · Queen Creek · Sat 3/5, Sun 8:30/10/11:30<br>
+    → Chapters (topic-based): 0:00 The hook · 2:30 The text (Matthew 6) · 12:00 Point 1 · … · Response<br>
+    Scripture · Series · Speaker: Bill Bush · Subscribe + @wearerockpoint</p>
+  </div>
+  <h4>Clip / Shorts strategy (your biggest lever)</h4>
+  <ul>
+    <li>Cut <strong>3–5 vertical clips per message</strong> + repurpose each weekend’s <strong>“Story of Life Change”</strong> as a testimony Short. Post to YouTube Shorts, Reels, and TikTok.</li>
+    <li>Upload the <strong>message-only cut</strong> as the primary weekend video; keep the full service as secondary.</li>
+    <li>Turn captions <strong>on</strong> for every upload (accessibility + search + silent-scroll viewing).</li>
+  </ul>
+  <h4>Playlists, retention &amp; workflow</h4>
+  <ul>
+    <li>Playlists by series already make sense — add a “Start Here / Most-Watched” playlist and a “Stories of Life Change” playlist.</li>
+    <li>Front-load a 20-second hook on message uploads; topic-based chapters; consistent weekly cadence you already have.</li>
+  </ul>
+</section>
+
+<!-- 5. SOCIAL -->
+<section id="social" class="pagebreak">
+  <div class="sec-num">Section 5</div>
+  <h2 class="sec">Social Media Audit</h2>
+  <p><span class="gradechip b">Social grade: B</span></p>
+  <p class="lead">Instagram and the podcast are genuine strengths. The gaps are a starved TikTok, a YouTube that doesn’t feed off the others, and a content mix that’s heavy on “what’s happening” and light on the two things that actually convert strangers: testimony and guest-focused content.</p>
+
+  <h3>Channel inventory</h3>
+  <table>
+    <thead><tr><th>Channel</th><th>Reach</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Instagram</strong> @wearerockpoint</td><td>17K · 2,060 posts</td><td>Flagship. Clear bio: “Pointing people to Jesus by loving them like Jesus” + all five service times. Active. <span class="flag f-good">Strong</span></td></tr>
+      <tr><td><strong>Podcast</strong> (PodPoint)</td><td>5.0★ (21)</td><td>Weekly, with both full-service and “Message Only” cuts. Healthy. <span class="flag f-good">Strong</span></td></tr>
+      <tr><td><strong>Facebook</strong> /RockPointChurch</td><td>Established</td><td>Active, livestreams services. (Exact follower count not retrievable this session.) <span class="flag f-good">OK</span></td></tr>
+      <tr><td><strong>YouTube</strong></td><td>10.6K subs</td><td>Low per-video reach; no Shorts (Section 4). <span class="flag f-warn">Underperforming</span></td></tr>
+      <tr><td><strong>TikTok</strong> @wearerockpoint</td><td>1,386 · 8.3K likes</td><td>Same handle as IG, but ~1/12th the following. Clearly under-prioritized. <span class="flag f-bad">Neglected</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Content, categorized</h3>
+  <table>
+    <thead><tr><th>Type</th><th>Level</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>Community / culture</td><td class="cell-hi"><span class="flag f-good">Strong</span></td><td>Events, worship, life of the church — well covered.</td></tr>
+      <tr><td>Invitation</td><td class="cell-mid">OK</td><td>Service times + “join us,” but often graphic-led.</td></tr>
+      <tr><td>Discipleship</td><td class="cell-mid">OK</td><td>Some sermon content; could be far more clip-driven.</td></tr>
+      <tr><td>Promotional</td><td class="cell-mid">Heavy</td><td>App, campaign, events — risk of feeling institutional.</td></tr>
+      <tr><td>Testimony</td><td class="cell-lo"><span class="flag f-bad">Underused</span></td><td>You film “Stories of Life Change” weekly — but they’re not a social series. Biggest miss.</td></tr>
+      <tr><td>Guest-focused</td><td class="cell-lo"><span class="flag f-bad">Thin</span></td><td>“What to expect” lives on the site, not in the feed.</td></tr>
+      <tr><td>Awareness (clips)</td><td class="cell-lo"><span class="flag f-bad">Thin</span></td><td>Sermon clips underused as discovery; TikTok starved.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Does the feed answer “Why would I visit <em>this</em> church?”</strong> Partly. It shows a busy, alive, well-produced church. It under-shows changed lives (testimony), the welcome a guest will receive (guest-focused), and the teaching (clips) — the three things that move a stranger to attend.</p>
+
+  <h3>Idea bank</h3>
+  <h4>10 post ideas</h4>
+  <ol>
+    <li>“New here? Here’s exactly what your first Sunday looks like” carousel.</li>
+    <li>Meet a pastor: one leader, one sentence on why they love Queen Creek.</li>
+    <li>Special Needs ministry spotlight — who it serves and how.</li>
+    <li>This weekend’s big idea as a Montserrat quote card (red on ink).</li>
+    <li>Support &amp; Recovery: “you’re not alone” + how to take a first step.</li>
+    <li>Rock Point Coffee Co. tie-in: “grab a coffee, stay for church.”</li>
+    <li>Baptism celebration recap + “you could be next.”</li>
+    <li>Kids check-in walkthrough for nervous parents.</li>
+    <li>“Say Yes to Jesus” — one story, one invitation.</li>
+    <li>Serve-team spotlight: faces of the people who make the weekend happen.</li>
+  </ol>
+  <h4>10 reel / short ideas</h4>
+  <ol>
+    <li>60-second “Story of Life Change” (straight from the weekend).</li>
+    <li>Pastor Bill answers one honest question in 40 seconds.</li>
+    <li>“What to expect in 45 seconds,” filmed on campus.</li>
+    <li>The big idea of the week, stated cold to camera.</li>
+    <li>Worship moment + one lyric overlay.</li>
+    <li>“3 reasons people avoid church — our honest take.”</li>
+    <li>Kids/Youth hype reel for parents.</li>
+    <li>Behind the scenes: setting up for 5 services.</li>
+    <li>Special Needs ministry in 30 seconds.</li>
+    <li>“One thing the gospel changes about Monday.”</li>
+  </ol>
+  <h4>5 sermon-clip ideas</h4>
+  <ol>
+    <li>“Temporal things will never be enough for a heart made for eternity.”</li>
+    <li>The gospel in 45 seconds.</li>
+    <li>The single most quotable minute of each weekend message.</li>
+    <li>A hard question answered honestly from the text.</li>
+    <li>The big idea + the one application.</li>
+  </ol>
+  <h4>5 testimony content ideas</h4>
+  <ol>
+    <li>Repurpose every weekend “Story of Life Change” as a standalone reel.</li>
+    <li>Baptism-day interviews: “What changed?”</li>
+    <li>Recovery story (with consent): “Support &amp; Recovery saved my year.”</li>
+    <li>A family who found belonging in a Group.</li>
+    <li>A volunteer: “Why I serve.”</li>
+  </ol>
+  <h4>5 guest-focused content ideas</h4>
+  <ol>
+    <li>“Where do I park?” (turn your flashers on) in 15 seconds.</li>
+    <li>“What do I wear?” (anything — bring a jacket).</li>
+    <li>“What happens with my kids?” — the check-in.</li>
+    <li>“How long is a service?” — 70 minutes, the flow.</li>
+    <li>“I’m nervous to come alone” — meet the New Here? Start Here! team.</li>
+  </ol>
+  <h4>5 event-promotion improvements</h4>
+  <ol>
+    <li>Lead with a person inviting on camera, not a flyer.</li>
+    <li>Date/time/location/link in the first line, every time.</li>
+    <li>Day-of “this is today” story.</li>
+    <li>24-hour recap of every event (proof it’s worth attending).</li>
+    <li>One consistent event template so events are instantly recognizable.</li>
+  </ol>
+  <h4>A better weekly posting rhythm</h4>
+  <ul>
+    <li><strong>Mon</strong> sermon clip · <strong>Tue</strong> testimony (Story of Life Change) · <strong>Wed</strong> community/ministry spotlight · <strong>Thu</strong> big-idea quote card · <strong>Fri</strong> “new here? plan a visit” · <strong>Sat</strong> “see you this weekend” + times · <strong>Sun</strong> live stories + worship moment.</li>
+    <li>Post every reel to <strong>TikTok</strong> and <strong>YouTube Shorts</strong> the same day — you’re already making the content for IG.</li>
+  </ul>
+</section>
+
+<!-- 6. BRAND -->
+<section id="brand" class="pagebreak">
+  <div class="sec-num">Section 6</div>
+  <h2 class="sec">Brand &amp; Messaging</h2>
+  <p><span class="gradechip b">Brand &amp; messaging grade: B+</span></p>
+  <p class="lead">A strong, coherent brand with one of the better mission lines in the category. The visual system is bold and consistent; the verbal system is clear at the top (mission) and muddled in the middle (a thicket of similarly-named “next step” programs).</p>
+
+  <h3>What’s working</h3>
+  <ul>
+    <li><strong>A genuinely good mission line:</strong> “We exist to point people to Jesus by loving them like Jesus.” Clear, active, repeatable, and it doubles as a behavior. Hard to improve.</li>
+    <li><strong>A strong community brand:</strong> “We Are Rock Point” shows up everywhere coherently — the app, the class, the campaign, the @wearerockpoint handle. It signals belonging and ownership.</li>
+    <li><strong>A confident visual identity:</strong> deep ink (#05171e), a signature Rock Point red (#ed4144), bold uppercase Montserrat + Roboto. Modern and energetic.</li>
+    <li><strong>A welcoming theological posture:</strong> “in essentials unity, in non-essentials liberty, in all things love” — disarming for the unchurched, clear for the committed.</li>
+  </ul>
+
+  <h3>Where it’s inconsistent or generic</h3>
+  <ul>
+    <li><strong>Next-step naming is a maze:</strong> Newcomers’ Dinner, We Are Rock Point, Foundations, Membership (URL: <code>membership-dessert</code>), Classes — a newcomer can’t tell what to attend first or how they differ. Insider names without plain-language order.</li>
+    <li><strong>The look is strong but category-typical:</strong> dark + red + bold uppercase is common megachurch styling. You’re saved by consistency, not by distinctiveness — lean harder on what’s actually unique (live teaching, deep care, homegrown Queen Creek roots).</li>
+    <li><strong>Mission rendered as an image</strong> undercuts the very line that should be everywhere in crawlable, copyable text.</li>
+  </ul>
+
+  <h3>What you’re trying to say vs. what lands</h3>
+  <p><strong>Intended:</strong> “A large, warm, all-are-welcome church that genuinely cares for you and points you to Jesus.” <strong>Actually landing for an outsider:</strong> “A big, busy, well-run church with a lot of programs” — the <em>care</em> and the <em>welcome</em> are real but get buried under logistics and program names. Bring the warmth and the changed lives to the front.</p>
+
+  <div class="box rewrite">
+    <h4>Tighter brand language (ready to use)</h4>
+    <p><strong>One-sentence description:</strong> Rock Point is a non-denominational church in Queen Creek, Arizona, where people at every point in life come as they are to be loved and pointed to Jesus.</p>
+    <p><strong>Homepage headline:</strong> You belong here.</p>
+    <p><strong>Guest invitation:</strong> First time? Come as you are this weekend. Park up front with your flashers on, we’ll meet you at New Here? Start Here!, and we’ll take great care of your kids.</p>
+    <p><strong>Instagram bio:</strong> Rock Point Church · Queen Creek, AZ<br>Pointing people to Jesus by loving them like Jesus<br>Sat 3 &amp; 5 · Sun 8:30, 10 &amp; 11:30<br>↓ Plan your visit</p>
+    <p><strong>YouTube description:</strong> Rock Point is a church in Queen Creek, AZ. New messages every week + clips worth sharing. Plan a visit: rockpointchurch.com/plan-a-visit — Saturdays &amp; Sundays.</p>
+    <p><strong>About-page summary:</strong> Since 2002, Rock Point has been a church for Queen Creek — a place where the hurting, the curious, and the committed all belong. We exist to point people to Jesus by loving them like Jesus.</p>
+  </div>
+</section>
+
+<!-- 7. GUEST JOURNEY -->
+<section id="guest" class="pagebreak">
+  <div class="sec-num">Section 7</div>
+  <h2 class="sec">Guest Journey Audit</h2>
+  <p><span class="gradechip b">Guest journey grade: B</span></p>
+  <p class="lead">In person, the guest experience is excellent and well-documented. Online, the journey snags in two spots: a <em>buried</em> Plan-a-Visit and an <em>overwhelming</em> next-steps menu that asks a newcomer to choose among ten roughly-equal options.</p>
+
+  <h3>The journey, stage by stage</h3>
+  <table>
+    <thead><tr><th>Stage</th><th>Today</th><th>Friction</th></tr></thead>
+    <tbody>
+      <tr><td>1 Hears about you</td><td>Reputation, IG, invite</td><td><span class="flag f-good">Strong</span> Big local footprint.</td></tr>
+      <tr><td>2 Searches online</td><td>Ranks locally</td><td><span class="flag f-warn">OK</span> Good keywords; generic page titles.</td></tr>
+      <tr><td>3 Lands on site/social</td><td>Polished, warm</td><td><span class="flag f-warn">OK</span> No obvious “Plan a Visit” in nav.</td></tr>
+      <tr><td>4 Decides to visit</td><td>What-to-Expect reassures</td><td><span class="flag f-good">Strong</span> Best part of the journey.</td></tr>
+      <tr><td>5 Finds time/location</td><td>5 services, address, map</td><td><span class="flag f-good">Strong</span> Crystal clear.</td></tr>
+      <tr><td>6 Evaluates kids</td><td>By age + special needs</td><td><span class="flag f-good">Strong</span> Reassuring.</td></tr>
+      <tr><td>7 Attends</td><td>Flashers parking, New Here tent, check-in</td><td><span class="flag f-good">Strong</span> Excellent in person.</td></tr>
+      <tr><td>8 Decides to return</td><td>App + Church Center</td><td><span class="flag f-warn">OK</span> No surfaced first-timer follow-up.</td></tr>
+      <tr><td>9 Looks for next steps</td><td>10-tile wall</td><td><span class="flag f-bad">Weak</span> Too many equal options.</td></tr>
+      <tr><td>10 Group/baptism/serve/member</td><td>All exist</td><td><span class="flag f-warn">Unclear</span> No sequence; 4 overlapping intro steps.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Quick answers to the diagnostic questions</h3>
+  <ul>
+    <li><strong>Where/when you meet?</strong> Yes — five services, address, map, all clear.</li>
+    <li><strong>What to expect?</strong> Yes — outstanding FAQ.</li>
+    <li><strong>Kids clear &amp; reassuring?</strong> Yes — by age, plus Special Needs.</li>
+    <li><strong>Parking/check-in explained?</strong> Yes — flashers-for-guests is a great touch.</li>
+    <li><strong>Plan-a-Visit path?</strong> Exists, but buried (not in primary nav).</li>
+    <li><strong>Tone welcoming without cheese?</strong> Yes — “come as you are” is warm and credible.</li>
+    <li><strong>Next steps too many/vague/hidden?</strong> Too many and un-sequenced — the core flaw.</li>
+    <li><strong>Clear pathway after the weekend?</strong> Not obviously — the app helps, but there’s no visible “here’s your next one thing.”</li>
+  </ul>
+
+  <div class="box rewrite">
+    <h4>Recommended first-time-guest page copy (top)</h4>
+    <p><strong>Your first weekend, made easy.</strong><br>Pull in and turn your flashers on — a parking team will wave you to a guest spot up front. Head to <em>New Here? Start Here!</em> in the courtyard and we’ll walk you in, get your kids checked in, and point you to coffee. Services run about 70 minutes. Come as you are — we saved you a seat. <strong>[ Let us know you’re coming → ]</strong></p>
+  </div>
+
+  <div class="box rewrite">
+    <h4>Recommended follow-up sequence (after a first visit / connect)</h4>
+    <ul>
+      <li><strong>Sunday PM (text):</strong> “So glad you were at Rock Point today! Reply with any questions — and here’s your gift if you missed it.”</li>
+      <li><strong>Tuesday (email):</strong> This weekend’s message + “the easiest next step is the Newcomers’ Dinner — here’s the next date.”</li>
+      <li><strong>Thursday (email):</strong> A 60-second “Story of Life Change” + an invite back.</li>
+      <li><strong>Saturday (text):</strong> “Service times this weekend — want us to save you a seat?”</li>
+      <li><strong>Week 2 (email):</strong> One clear invitation to a Group.</li>
+    </ul>
+  </div>
+
+  <h3>One clear next-step ladder (replace the 10-tile wall)</h3>
+  <p>Primary path, in order: <strong>Plan a Visit → Newcomers’ Dinner → Join a Group → Serve → Membership.</strong> Decisions (Say Yes to Jesus, Baptism) and growth (Classes/Foundations) sit alongside as “any time,” not competing for the same slot. One obvious first step beats ten equal ones.</p>
+</section>
+
+<!-- 8. MINISTRY -->
+<section id="ministry" class="pagebreak">
+  <div class="sec-num">Section 8</div>
+  <h2 class="sec">Ministry Pathway Audit</h2>
+  <p class="lead">Ministry <em>coverage</em> is a genuine strength — among the most complete in the region, including ministries many churches skip. The weakness is <em>pathway</em>: with this many doors, there’s no obvious order, so a new person doesn’t know what to do first, second, third.</p>
+
+  <table>
+    <thead><tr><th>Ministry</th><th>Purpose?</th><th>Next step?</th><th>The fix</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Kids</strong> (Nursery–Gr5)</td><td>Yes</td><td>Yes</td><td>Keep; add a “first visit” reassurance video.</td></tr>
+      <tr><td><strong>Youth</strong> (6–12)</td><td>Yes</td><td>Yes</td><td>MS Wed 6:30, HS Sun 6pm — clear. Add student/parent testimony.</td></tr>
+      <tr><td><strong>Young Adults</strong> (18–25)</td><td>Yes</td><td>Yes</td><td>Surface meeting time consistently across site + social.</td></tr>
+      <tr><td><strong>Special Needs</strong></td><td class="cell-hi">Yes</td><td>Yes</td><td>A standout — feature it on the homepage, not buried.</td></tr>
+      <tr><td><strong>Support &amp; Recovery</strong></td><td class="cell-hi">Yes</td><td>Mostly</td><td>High-trust; give it a clear “start this week” step.</td></tr>
+      <tr><td><strong>Counseling / Care</strong></td><td class="cell-hi">Yes</td><td>Mostly</td><td>Rare and valuable; make the first contact frictionless.</td></tr>
+      <tr><td><strong>Groups</strong></td><td>Yes</td><td>Yes</td><td>Make this the clear “after you visit” step.</td></tr>
+      <tr><td><strong>Serving / Volunteer</strong></td><td>Yes</td><td>Yes</td><td>Add faces + time commitment per team.</td></tr>
+      <tr><td><strong>Baptism / Say Yes</strong></td><td>Yes</td><td>Yes</td><td>Keep prominent; pair with testimony clips.</td></tr>
+      <tr><td><strong>Membership</strong></td><td>Partly</td><td class="cell-mid">Confusing</td><td>Clarify vs. Newcomers’/We Are Rock Point/Foundations; fix the <code>membership-dessert</code> slug.</td></tr>
+      <tr><td><strong>Intro classes</strong> (Newcomers’, We Are RP, Foundations)</td><td class="cell-lo">Overlapping</td><td class="cell-lo">Unclear order</td><td>Collapse into one labeled ladder: Visit → Meet Us → Grow → Commit.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box rewrite">
+    <h4>Proposed discipleship pathway (one clear ladder)</h4>
+    <p><strong>BELONG</strong> — Plan a visit &amp; come this weekend. → <strong>MEET US</strong> — Newcomers’ Dinner (one step, clearly first). → <strong>GROW</strong> — Join a Group. → <strong>SERVE</strong> — Join a team. → <strong>COMMIT</strong> — We Are Rock Point / Membership. <br>Decisions (Say Yes to Jesus, Baptism) and deeper Classes/Foundations run <em>alongside</em> the ladder, available any time — not as competing “first steps.”</p>
+  </div>
+</section>
+
+<!-- 9. TONE -->
+<section id="tone" class="pagebreak">
+  <div class="sec-num">Section 9</div>
+  <h2 class="sec">Theological &amp; Pastoral Tone</h2>
+  <p><span class="gradechip b">Tone grade: B+</span></p>
+  <p class="lead">Warm, welcoming, doctrinally solid, and refreshingly non-combative. The tone is one of Rock Point’s best assets. The watch-points are the usual ones for a large, felt-need-oriented church: keep the gospel and the biblical text load-bearing, not just the application.</p>
+
+  <h3>Where you sound biblically strong</h3>
+  <ul>
+    <li><strong>Clear gospel + clear welcome held together:</strong> “Come as you are! The hurting, the lost, the broken — everyone is welcome here” alongside “we exist to point people to Jesus.” That’s grace and truth in one breath.</li>
+    <li><strong>Doctrinal depth without heaviness:</strong> the beliefs page covers God, Jesus, Spirit, Bible, Salvation, and People with biblical support <em>and</em> practical application — substantive, not slogan-y.</li>
+    <li><strong>A disarming posture for the unchurched:</strong> “in essentials unity, in non-essentials liberty, in all things love” lowers defenses without lowering the bar.</li>
+    <li><strong>No manipulation, no hype</strong> in the public copy — the tone is calm, kind, and confident.</li>
+  </ul>
+
+  <h3>Where it sounds thin, generic, or could confuse outsiders</h3>
+  <ul>
+    <li><strong>Felt-need framing can read as self-help</strong> if the text isn’t visibly driving the message (see Sermon). Keep the Bible on screen and in the structure.</li>
+    <li><strong>Insider program names</strong> (We Are Rock Point, Foundations, Newcomers’, Membership Dessert) aren’t self-explanatory to a newcomer — translate them in plain language at first mention.</li>
+    <li><strong>The warmth is buried</strong> beneath logistics, app promos, and a capital campaign. The most Christlike thing about the site — the care for hurting people — should be louder than the campaign banner.</li>
+  </ul>
+
+  <h3>Recommendations</h3>
+  <ul>
+    <li>Lead public content with <em>people and care</em>, not programs and promos. Testimony first, logistics second.</li>
+    <li>Make the preaching text visible and load-bearing every week.</li>
+    <li>Translate every program name on first use (“Foundations — a 4-week class on the basics of following Jesus”).</li>
+  </ul>
+</section>
+
+<!-- 10. DESIGN -->
+<section id="design" class="pagebreak">
+  <div class="sec-num">Section 10</div>
+  <h2 class="sec">Design &amp; Visual Communication</h2>
+  <p><span class="gradechip b">Design grade: B+</span></p>
+  <p class="lead">A strong, consistent, professionally-built visual system. The fixes are technical (stop baking text into images), editorial (tighten the busy menu), and platform-specific (package YouTube for clicks).</p>
+
+  <h3>The system (pulled from your own site)</h3>
+  <table>
+    <thead><tr><th>Element</th><th>Spec</th></tr></thead>
+    <tbody>
+      <tr><td>Ink / text</td><td>#05171e (near-black teal)</td></tr>
+      <tr><td>Signature accent</td><td>#ed4144 (Rock Point red)</td></tr>
+      <tr><td>Neutrals</td><td>#ffffff, #f7f7f7, #efefef, #6f6f6f</td></tr>
+      <tr><td>Display type</td><td>Montserrat (700–900, uppercase)</td></tr>
+      <tr><td>Body type</td><td>Roboto</td></tr>
+      <tr><td>Photography</td><td>Real campus &amp; event photography (carousel-heavy)</td></tr>
+    </tbody>
+  </table>
+  <p><em>(This report is built in that exact system, as a working style reference.)</em></p>
+
+  <h3>What’s strong / dated / generic / undermines credibility</h3>
+  <ul>
+    <li><span class="flag f-good">Strong</span> Cohesive palette + bold Montserrat + genuine photography read modern, energetic, and trustworthy.</li>
+    <li><span class="flag f-bad">Undermines credibility</span> <strong>Text baked into images</strong> (mission PNG, menu/“elements” graphics) — bad for SEO, accessibility, and edits.</li>
+    <li><span class="flag f-warn">Busy</span> The image-tiled mega-menu and 10-tile next-steps page create visual overload; hierarchy is flat.</li>
+    <li><span class="flag f-warn">Inconsistent</span> YouTube packaging (titles/thumbnails) doesn’t match the polish of the website and series art.</li>
+  </ul>
+
+  <h3>Design rules to adopt</h3>
+  <ol>
+    <li><strong>Live text, not image-text</strong> for all headlines, mission, and navigation.</li>
+    <li><strong>One clear hierarchy per page:</strong> one primary action (red), everything else secondary.</li>
+    <li><strong>One sermon thumbnail system:</strong> series art + ≤4-word Montserrat hook + speaker face.</li>
+    <li><strong>Two-accent discipline:</strong> ink + white base, red as the only accent — don’t dilute the red by overusing it.</li>
+    <li><strong>Template the recurring social pieces</strong> (quote card, testimony, event, “new here”) so volunteers stay on-brand.</li>
+    <li><strong>Photography:</strong> faces and the welcome a guest will actually receive, over event-logo graphics.</li>
+  </ol>
+</section>
+
+<!-- 11. LOCAL -->
+<section id="local" class="pagebreak">
+  <div class="sec-num">Section 11</div>
+  <h2 class="sec">Competitive &amp; Local Positioning</h2>
+  <p class="lead">Rock Point competes in one of the most church-dense, sophisticated markets in the country — the Arizona East Valley — where national multisite giants have planted local campuses. Rock Point’s edge is that it is the <em>homegrown</em>, live-teaching, deeply-rooted Queen Creek church. That edge is under-claimed online.</p>
+
+  <h3>The local field (Queen Creek / East Valley)</h3>
+  <table>
+    <thead><tr><th>Church</th><th>Position</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Central Christian Church</strong></td><td>One of AZ’s largest; multisite with a Queen Creek campus. Big brand, big budget.</td></tr>
+      <tr><td><strong>Christ’s Church of the Valley (CCV)</strong></td><td>Among the largest churches in the U.S.; valley-wide multisite incl. Queen Creek. Polished digital funnels.</td></tr>
+      <tr><td><strong>Sun Valley Community Church</strong></td><td>Large East-Valley multisite; strong production.</td></tr>
+      <tr><td><strong>Calvary Chapel Queen Creek &amp; others</strong></td><td>Established local options.</td></tr>
+      <tr><td><strong>Rock Point Church</strong></td><td><strong>The homegrown Queen Creek church (since 2002)</strong> — live in-person teaching, deep care ministries, ~5,500 and growing, building toward a 3,000-seat center.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Does Rock Point stand out?</h3>
+  <ul>
+    <li><strong>In the building — clearly yes.</strong> It’s a large, thriving, high-care church and (by the planned 3,000-seat center) the biggest in Queen Creek’s town limits.</li>
+    <li><strong>Online — only partly.</strong> Against CCV/Central’s slick, clip-driven, funnel-optimized digital presence, Rock Point’s full-service uploads, buried Plan-a-Visit, and quiet TikTok make it look smaller online than it is in person. The multisite competitors are <em>satellites</em>; Rock Point is <em>home</em> — but the site doesn’t press that advantage.</li>
+  </ul>
+
+  <h3>How to win locally</h3>
+  <ol>
+    <li><strong>Own “home”:</strong> “Queen Creek’s church since 2002 — live teaching, real community, all in on this town.” That’s a claim a satellite campus literally cannot make.</li>
+    <li><strong>Lead with care:</strong> Special Needs, Support &amp; Recovery, Counseling — few competitors foreground this. Make it a homepage headline, not a sub-page.</li>
+    <li><strong>Match their funnel:</strong> clips → message → plan a visit, plus unique page titles and a prominent Plan-a-Visit, so you’re not out-converted on search and social by churches you out-serve in person.</li>
+  </ol>
+</section>
+
+<!-- 12. MATRIX -->
+<section id="matrix" class="pagebreak">
+  <div class="sec-num">Section 12</div>
+  <h2 class="sec">Scoring Matrix</h2>
+  <p class="lead">Twenty dimensions, scored 1–10. Average: <strong>7.1 / 10</strong> — a strong B+ church whose weak spots are concentrated in reach (YouTube) and conversion clarity (next steps / guest path). Every score below 7 is explained.</p>
+  <table>
+    <thead><tr><th>Dimension</th><th class="score">Score</th><th>If &lt;7, what must improve</th></tr></thead>
+    <tbody>
+      <tr><td>Website clarity</td><td class="score s-hi">7</td><td>—</td></tr>
+      <tr><td>Website design</td><td class="score s-hi">8</td><td>—</td></tr>
+      <tr><td>Mobile experience</td><td class="score s-hi">7</td><td>—</td></tr>
+      <tr><td>Guest conversion</td><td class="score s-mid">6</td><td>“Plan a Visit” buried; no single primary CTA; no surfaced first-timer follow-up.</td></tr>
+      <tr><td>Sermon quality</td><td class="score s-hi">8</td><td>—</td></tr>
+      <tr><td>Sermon accessibility</td><td class="score s-hi">7</td><td>—</td></tr>
+      <tr><td>Sermon theological depth</td><td class="score s-mid">6</td><td>Topical/felt-need framing risks topic-over-text (e.g., a worship series from Psalm 1); make the text load-bearing. (Provisional — full transcript not accessible.)</td></tr>
+      <tr><td>YouTube quality</td><td class="score s-lo">5</td><td>Full-service default uploads, no Shorts, week-number titles, captions off, low reach vs. size.</td></tr>
+      <tr><td>Social media quality</td><td class="score s-hi">7</td><td>—</td></tr>
+      <tr><td>Brand consistency</td><td class="score s-hi">8</td><td>—</td></tr>
+      <tr><td>Messaging clarity</td><td class="score s-hi">7</td><td>—</td></tr>
+      <tr><td>Visual design</td><td class="score s-hi">8</td><td>—</td></tr>
+      <tr><td>Guest pathway</td><td class="score s-mid">6</td><td>Buried Plan-a-Visit; un-sequenced next steps.</td></tr>
+      <tr><td>Ministry pathway</td><td class="score s-mid">6</td><td>Comprehensive but no clear order; four overlapping intro/commitment steps.</td></tr>
+      <tr><td>Next-steps clarity</td><td class="score s-lo">5</td><td>Flat wall of ~10 equal tiles; no “start here.”</td></tr>
+      <tr><td>Local search / discoverability</td><td class="score s-hi">7</td><td>—</td></tr>
+      <tr><td>Trust-building</td><td class="score s-hi">9</td><td>—</td></tr>
+      <tr><td>Evangelistic accessibility</td><td class="score s-hi">8</td><td>—</td></tr>
+      <tr><td>Pastoral tone</td><td class="score s-hi">8</td><td>—</td></tr>
+      <tr><td>Overall digital credibility</td><td class="score s-hi">8</td><td>—</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 13. LEVERAGE -->
+<section id="leverage" class="pagebreak">
+  <div class="sec-num">Section 13</div>
+  <h2 class="sec">The 20 Highest-Leverage Fixes</h2>
+  <p class="lead">Ranked by impact, sequenced by when to do them. For a church this resourced, nearly every high-impact move is a matter of decision and workflow, not budget.</p>
+
+  <h3>🔴 Fix this immediately (this week, free)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Fix</th><th>Impact</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Add a red <strong>Plan a Visit</strong> button to the primary navigation.</td><td>High</td><td>30 min · Free</td></tr>
+      <tr><td>2</td><td>Write unique titles + meta-descriptions for Home, About, Next Steps.</td><td>High</td><td>1 hr · Free</td></tr>
+      <tr><td>3</td><td>Turn <strong>captions ON</strong> for every YouTube upload (going forward + backfill key ones).</td><td>High</td><td>Low · Free</td></tr>
+      <tr><td>4</td><td>Upload the <strong>“Message Only” cut</strong> as the primary weekend YouTube video.</td><td>High</td><td>Low · Free</td></tr>
+      <tr><td>5</td><td>Convert the mission statement (and key text-images) to live, styled text.</td><td>Med</td><td>1 hr · Free</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🟠 Fix in the next 30 days</h3>
+  <table>
+    <thead><tr><th>#</th><th>Fix</th><th>Impact</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>6</td><td>Cut <strong>3–5 sermon clips/week</strong> → YouTube Shorts + Reels + TikTok, each with a CTA.</td><td>High</td><td>Med · Free</td></tr>
+      <tr><td>7</td><td>Revive <strong>TikTok</strong> — post existing clips; aim for 3–4/week.</td><td>High</td><td>Low · Free</td></tr>
+      <tr><td>8</td><td>Rebuild <strong>Next Steps</strong> as a sequenced ladder (Belong→Meet Us→Grow→Serve→Commit).</td><td>High</td><td>Med · Free</td></tr>
+      <tr><td>9</td><td>Launch a weekly <strong>“Story of Life Change”</strong> testimony reel (you already film these).</td><td>High</td><td>Low · Free</td></tr>
+      <tr><td>10</td><td>Re-title YouTube messages by <strong>topic/felt-need</strong>; add a hook + face to thumbnails.</td><td>High</td><td>Low · Free</td></tr>
+      <tr><td>11</td><td>Build a <strong>first-time-guest follow-up</strong> sequence (text + email via Church Center).</td><td>High</td><td>Med · Free</td></tr>
+      <tr><td>12</td><td>Feature <strong>Special Needs / Recovery / Care</strong> on the homepage — your best trust signal.</td><td>Med</td><td>Low · Free</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🟡 Fix in the next 90 days</h3>
+  <table>
+    <thead><tr><th>#</th><th>Fix</th><th>Impact</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>13</td><td>Make the preaching text visible on screen + restate the big idea 3× (clip-ready preaching).</td><td>High</td><td>Low · Free</td></tr>
+      <tr><td>14</td><td>Add “Start Here / Most-Watched” and “Stories of Life Change” YouTube playlists.</td><td>Med</td><td>Low · Free</td></tr>
+      <tr><td>15</td><td>Relabel intro classes in plain language; clarify Membership vs. the rest.</td><td>Med</td><td>Low · Free</td></tr>
+      <tr><td>16</td><td>Rewrite the homepage hero (human hook + one primary CTA).</td><td>Med</td><td>Low · Free</td></tr>
+      <tr><td>17</td><td>Publish the evergreen guest-focused set (park/kids/length/“nervous to come alone”).</td><td>Med</td><td>Med · Free</td></tr>
+      <tr><td>18</td><td>Slim the mega-menu to ~5 top items.</td><td>Med</td><td>Med · Free</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🟢 Build over the next year</h3>
+  <table>
+    <thead><tr><th>#</th><th>Fix</th><th>Impact</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>19</td><td>Stand up a sustainable <strong>content workflow</strong> (clip pipeline + testimony engine + captions) that runs every weekend without heroics.</td><td>High (compounding)</td><td>High · $</td></tr>
+      <tr><td>20</td><td>Build a coordinated <strong>series-launch system</strong> (one art kit across web/YouTube/podcast/social + clips + a “start here”) and track a real digital→visit→next-step funnel.</td><td>High (compounding)</td><td>High · varies</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 14. COPY -->
+<section id="copy" class="pagebreak">
+  <div class="sec-num">Section 14</div>
+  <h2 class="sec">Copywriting Rewrites</h2>
+  <p class="lead">A ready-to-paste copy deck — human, warm, clear. Less logistics and program-speak; more welcome, care, and one obvious action.</p>
+
+  <div class="box rewrite"><h4>Homepage headline</h4><p>You belong here.</p></div>
+  <div class="box rewrite"><h4>Homepage subheadline</h4><p>Rock Point is a church in Queen Creek for people at every point in life. Come as you are — online or on campus. Saturdays 3 &amp; 5pm · Sundays 8:30, 10 &amp; 11:30am.</p></div>
+  <div class="box rewrite"><h4>Plan Your Visit invitation</h4><p>Pull in and turn your flashers on — our team will wave you to a guest spot up front. Stop by <em>New Here? Start Here!</em> in the courtyard and we’ll walk you in, check your kids in, and point you to coffee. About 70 minutes. We saved you a seat.</p></div>
+  <div class="box rewrite"><h4>Kids ministry description</h4><p>From the nursery to 5th grade, Rock Point Kids is a safe, fun place where your kids learn that God loves them. Secure check-in, trained and background-checked volunteers, and age-specific environments — including a Special Needs ministry, because <em>every</em> kid belongs here.</p></div>
+  <div class="box rewrite"><h4>Groups description</h4><p>You weren’t meant to do life alone. Groups are where the weekend becomes real friendship — people who open the Bible together, show up for each other, and figure out following Jesus side by side. There’s a group near you. Let’s find it.</p></div>
+  <div class="box rewrite"><h4>Serving invitation</h4><p>Rock Point runs on everyday people who say yes. Serving is the fastest way to make a big church feel small — to belong, grow, and use what God gave you. Greet guests, love on kids, run a camera, pour coffee. Find your team →</p></div>
+  <div class="box rewrite"><h4>Giving language</h4><p>Everything here — five services, kids and student ministry, recovery and care, reaching Queen Creek — is fueled by the generosity of this church. Giving is worship and trust, not a transaction. Thanks for being all in. Here’s how to give →</p></div>
+  <div class="box rewrite"><h4>Baptism description</h4><p>Baptism is how a follower of Jesus goes public — dying to an old life and rising to a new one. If you’ve said yes to Jesus, your next step is to be baptized, and we’d love to celebrate it with the whole church. Ready, or have questions? Start here →</p></div>
+  <div class="box rewrite"><h4>About-page summary</h4><p>Since 2002, Rock Point has been a church for Queen Creek — a place where the hurting, the curious, and the committed all belong. We exist to point people to Jesus by loving them like Jesus.</p></div>
+  <div class="box rewrite"><h4>Beliefs intro</h4><p>Here’s the heart of it: there’s one God, the Bible is true, and Jesus lived, died, and rose to rescue people who could never rescue themselves. In the essentials we stand firm; in the non-essentials we give grace; in everything we lead with love. The details are below — and you’re welcome here while you’re still deciding.</p></div>
+  <div class="box rewrite"><h4>First-time guest page</h4><p><strong>Your first weekend, made easy.</strong> Flashers on for guest parking, a friendly face at New Here? Start Here!, fast kids check-in, and great coffee. Come as you are — seriously, from flip-flops to dress shirts. About 70 minutes of worship and a message from the Bible you can actually use. <strong>[ Let us know you’re coming → ]</strong></p></div>
+  <div class="box rewrite"><h4>Instagram bio</h4><p>Rock Point Church · Queen Creek, AZ<br>Pointing people to Jesus by loving them like Jesus<br>Sat 3 &amp; 5 · Sun 8:30, 10 &amp; 11:30<br>↓ Plan your visit</p></div>
+  <div class="box rewrite"><h4>YouTube channel description</h4><p>Rock Point is a church in Queen Creek, AZ. New messages every week + clips worth sharing. Plan a visit: rockpointchurch.com/plan-a-visit — Saturdays &amp; Sundays. Pointing people to Jesus by loving them like Jesus.</p></div>
+  <div class="box rewrite"><h4>Sermon video description template</h4><p>[Published big idea — e.g., “Temporal things will never be enough for a heart made for eternity.”]<br><br>📍 New here? Plan a visit: rockpointchurch.com/plan-a-visit · Queen Creek · Sat 3/5 · Sun 8:30/10/11:30<br><br>Chapters (topic-based): 0:00 Hook · 1:30 The text · … · Response<br>Scripture · Series · Speaker: Bill Bush · Follow @wearerockpoint</p></div>
+  <div class="box rewrite"><h4>Event promotion template</h4><p>[WHAT] — [DAY, DATE] at [TIME], Rock Point Church.<br>[One sentence on why you’d want to be there.] Bring a friend. Save your spot → [link]<br><em>(Pair with a person inviting on camera, not just a graphic.)</em></p></div>
+</section>
+
+<!-- 15. CONTENT -->
+<section id="content" class="pagebreak">
+  <div class="sec-num">Section 15</div>
+  <h2 class="sec">90-Day Content Strategy</h2>
+  <p class="lead">You already generate elite raw material every weekend — a teaching pastor, worship, and real “Stories of Life Change.” The strategy is simply to <em>cut it up, caption it, and point it at a visit</em> — consistently, across every platform you already own.</p>
+
+  <h3>Weekly rhythm</h3>
+  <table>
+    <thead><tr><th>Day</th><th>Post</th><th>Goal</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>Sermon clip — the weekend’s big idea (Short + Reel + TikTok)</td><td>Reach</td></tr>
+      <tr><td>Tue</td><td>“Story of Life Change” testimony reel</td><td>Trust</td></tr>
+      <tr><td>Wed</td><td>Ministry spotlight (Kids / Recovery / Special Needs) + midweek youth</td><td>Care</td></tr>
+      <tr><td>Thu</td><td>Big-idea quote card (red on ink)</td><td>Discipleship</td></tr>
+      <tr><td>Fri</td><td>“New here? Plan a visit” + service times</td><td>Invitation</td></tr>
+      <tr><td>Sat</td><td>“See you this weekend” story + map</td><td>Conversion</td></tr>
+      <tr><td>Sun</td><td>Live stories + a worship moment; upload message-only + full service</td><td>Proof</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The 90 days, phased</h3>
+  <h4>Days 1–30 — Plumbing</h4>
+  <ul>
+    <li>Plan-a-Visit button + unique page titles; mission as live text.</li>
+    <li>Captions on; message-only cut becomes the primary YouTube upload; topic-based titles.</li>
+    <li>Revive TikTok with existing clips; set the weekly rhythm.</li>
+  </ul>
+  <h4>Days 31–60 — Engine</h4>
+  <ul>
+    <li>3–5 clips per message every week → Shorts/Reels/TikTok with CTAs.</li>
+    <li>Weekly “Story of Life Change” testimony reel becomes routine.</li>
+    <li>Rebuild Next Steps as a ladder; launch the first-timer follow-up sequence.</li>
+    <li>Publish the evergreen guest-focused set; feature care ministries on the homepage.</li>
+  </ul>
+  <h4>Days 61–90 — Compounding</h4>
+  <ul>
+    <li>Coordinated series launch (one art kit across web/YouTube/podcast/social + a “start here” clip).</li>
+    <li>“Start Here / Most-Watched” + testimony playlists; weekly email cadence.</li>
+    <li>Review what’s converting (clip → visit) and double down.</li>
+  </ul>
+
+  <h3>Channel-by-channel</h3>
+  <ul>
+    <li><strong>Clip strategy:</strong> 3–5 vertical clips/message → Shorts + Reels + TikTok; one CTA each.</li>
+    <li><strong>Testimony:</strong> repurpose every weekend “Story of Life Change” — your single biggest untapped asset.</li>
+    <li><strong>Guest-focused:</strong> the “first weekend” set, evergreen, pinned and embedded on Plan a Visit.</li>
+    <li><strong>Kids/family &amp; care:</strong> monthly spotlights; lead with Special Needs &amp; Recovery.</li>
+    <li><strong>YouTube:</strong> message-only as primary upload, captions on, topic titles, Shorts on, playlists.</li>
+    <li><strong>Email:</strong> weekly — the message + one clear next step; dedicated first-timer track.</li>
+    <li><strong>Website rhythm:</strong> refresh hero + “watch a clip” weekly; review titles/meta monthly; keep events current.</li>
+  </ul>
+</section>
+
+<!-- 16. FINAL -->
+<section id="final" class="pagebreak">
+  <div class="sec-num">Section 16</div>
+  <h2 class="sec">Final Diagnosis</h2>
+
+  <h3>What kind of church does this appear to be online?</h3>
+  <p>A large, established, warm, well-run non-denominational community church — strong on family, care, and belonging, clear on the gospel, contemporary in style, and deeply rooted in Queen Creek. It looks trustworthy and alive.</p>
+
+  <h3>Who is it best positioned to reach?</h3>
+  <p>Families and “come as you are” seekers across Queen Creek, Gilbert, and Chandler; people who need real care (special needs, recovery, counseling); and the unchurched looking for a welcoming, no-pressure on-ramp.</p>
+
+  <h3>The biggest gap between who you are in person and how you look online</h3>
+  <p>In person, Rock Point is a thriving 5,500-person church with deep care and momentum. Online, the sermons look sparsely watched (a few hundred views) and the next steps read like a directory. <strong>The internet makes Rock Point look smaller and busier than it actually is.</strong></p>
+
+  <h3>The single biggest communication problem</h3>
+  <p><strong>Clarity through abundance.</strong> There’s so much — ministries, programs, next steps, promos — that the one obvious action (plan a visit) and the one obvious path (what to do first) get lost.</p>
+
+  <h3>The single biggest strategic opportunity</h3>
+  <p><strong>Turn the weekend you already produce into a discovery engine:</strong> clips + testimonies → message → a single, clear Plan-a-Visit path, captioned and posted everywhere. You have megachurch content and small-church reach; close that gap.</p>
+
+  <div class="assess">
+    <div class="row"><div class="k">Stop</div><div class="v">Defaulting to full-service uploads with week-number titles and captions off; stacking ten equal next-steps tiles; baking text into images.</div></div>
+    <div class="row"><div class="k">Start</div><div class="v">Sermon clips + testimony reels across Shorts/Reels/TikTok; message-only as the primary upload; a sequenced next-steps ladder; a prominent Plan-a-Visit; unique page titles.</div></div>
+    <div class="row"><div class="k">Keep</div><div class="v">The care ministries, the What-to-Expect, live in-person teaching, the mission line, the strong Instagram + podcast, and the warm “come as you are” tone.</div></div>
+  </div>
+
+  <h3>What would make this substantially better within 90 days?</h3>
+  <p>Plumbing first (Plan-a-Visit, titles, captions, message-only uploads). Then the engine (weekly clips + testimony reels + TikTok, sequenced next steps, first-timer follow-up). Then compounding (coordinated series launches, playlists, funnel tracking). None of the highest-impact moves require budget — they require deciding that the feed deserves the same excellence as the room.</p>
+
+  <hr>
+  <p><small>Prepared June 10, 2026. Findings are based on publicly available content reviewed on that date (live website; the “Playlist For” and “Never Enough” weekend messages and their official descriptions; YouTube channel metrics; the Instagram, TikTok, and Facebook profiles; and the podcast listings). A full verbatim sermon transcript was not retrievable (captions disabled on some uploads; transcript feed blocked), so the sermon section relies on the church’s published big-idea lines, texts, structure, and packaging — noted in-text. Exact Facebook follower count was not retrievable this session. Brand colors and typefaces were extracted directly from the church’s website.</small></p>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="lockup">Rock Point Church<span class="dot">.</span></div>
+  <p style="margin-top:10px">Digital Presence Audit · June 2026<br><span style="color:#8a8e90">“Pointing people to Jesus by loving them like Jesus.”</span></p>
+</footer>
+
+</body>
+</html>
