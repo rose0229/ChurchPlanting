@@ -1,8 +1,8 @@
 # Thanksgiving Japan Flight Tracker
 
-Runs every morning via GitHub Actions. Searches Amadeus live flight inventory
-for Phoenix/Tucson → Tokyo/Osaka deals and emails you when prices drop under
-your target.
+Runs every morning via GitHub Actions. Searches live Skyscanner data (via
+Sky Scrapper on RapidAPI) for Phoenix/Tucson → Tokyo/Osaka deals and emails
+you when prices drop under your target.
 
 ## Search criteria
 
@@ -14,34 +14,35 @@ your target.
 | Return window | Dec 3–5, 2026 |
 | Travelers | 4 adults |
 | Max price | $900/person round-trip |
-| Max flight time | 20 hours per leg (incl. layovers) |
+| Max flight time | 20 hours per one-way leg |
 
-**Kyoto note:** No airport is in Kyoto. KIX (Osaka Kansai) is closest — 75 min
-by the Haruka Express train. NRT/HND (Tokyo) is ~2.5 hr to Kyoto by Shinkansen.
+**Kyoto note:** KIX (Osaka Kansai) is closest — 75 min by Haruka Express train.
+NRT/HND (Tokyo) is ~2.5 hr to Kyoto by Shinkansen.
 
 ---
 
 ## One-time setup
 
-### 1. Get free Amadeus API credentials
+### 1. Get a free RapidAPI key
 
-1. Sign up at **https://developers.amadeus.com** (free)
-2. Go to **My Apps → Create new app**
-3. Under the app, click **Request production access** (self-service, usually approved instantly)
-4. Copy your **API Key (Client ID)** and **API Secret (Client Secret)**
+1. Go to **rapidapi.com** and click **Sign Up** (use your Google account — 30 seconds)
+2. Search for **"Sky Scrapper"** (by apiheya) in the API Hub
+3. Click **Subscribe to Test** on the Basic (free) plan
+4. Your API key appears under **Apps → Default App → Authorization**
+5. Copy the key
 
-> The test environment (`test.api.amadeus.com`) returns synthetic data that
-> doesn't reflect real prices. You need production credentials for real results.
+> The Basic free plan covers ~500 requests/month. This tracker uses ~120/month
+> (4 searches/day). You can check the exact limit on the Sky Scrapper pricing page.
 
 ### 2. Create a Gmail App Password
 
-Your script sends alerts via Gmail SMTP. It needs an App Password — **not** your
-regular Gmail password.
+The script sends alerts via Gmail SMTP — it needs an App Password, not your
+regular password.
 
 1. Go to **myaccount.google.com → Security → 2-Step Verification** (must be on)
-2. Scroll to the bottom → **App passwords**
-3. Name it "Flight Tracker", click **Create**
-4. Copy the 16-character password — you'll only see it once
+2. Scroll to **App passwords** at the bottom
+3. Name it "Flight Tracker" → click **Create**
+4. Copy the 16-character password (shown only once)
 
 ### 3. Add GitHub Secrets
 
@@ -49,42 +50,41 @@ In this repo: **Settings → Secrets and variables → Actions → New repositor
 
 | Secret name | Value |
 |---|---|
-| `AMADEUS_CLIENT_ID` | Amadeus API Key (production) |
-| `AMADEUS_CLIENT_SECRET` | Amadeus API Secret (production) |
+| `RAPIDAPI_KEY` | Your RapidAPI key from step 1 |
 | `SMTP_FROM_EMAIL` | Gmail address to send from |
-| `SMTP_APP_PASSWORD` | 16-character Gmail App Password |
+| `SMTP_APP_PASSWORD` | 16-character App Password from step 2 |
 | `NOTIFY_EMAIL` | Email address to receive alerts |
 
-### 4. Enable and test the workflow
+### 4. Enable and test
 
-1. Go to the **Actions** tab in this repo
+1. Go to **Actions** tab in this repo
 2. Click **Thanksgiving Japan Flight Tracker**
-3. Click **Run workflow** → **Run workflow** to trigger a manual test run
+3. Click **Run workflow** to trigger a manual test run immediately
 4. Check the run logs — you'll see each route being searched
-5. Check your inbox for an alert (only sent when new deals are found)
+5. An email is only sent when new deals are found, so no email on a dry run is normal
 
 ---
 
-## Schedule
+## How it works
 
-Runs daily at **2 PM UTC** (7 AM Phoenix time in winter, 8 AM in summer).
+Each day the tracker searches all 4 routes (PHX/TUS → NRT/KIX) against one
+departure/return date pair. The date pair rotates through all 9 combinations
+(3 departure × 3 return dates) over a 9-day cycle — meaning every specific
+date combination gets checked roughly every 9 days.
 
-## How deduplication works
+This keeps API usage at ~4 calls/day (~120/month), well within the free tier.
 
-`seen_deals.json` tracks flight IDs (route + dates + price + carrier) that have
-already triggered an alert. It's committed back to the repo after each run. You'll
-only get an email when a new deal appears that you haven't been notified about before.
-
-To reset and re-alert on all current deals, clear `seen_deals.json` to `[]` and push.
+`seen_deals.json` tracks which deals have already triggered an alert (by
+route + dates + price + carrier). It's committed back to the repo after each
+run. To reset and re-alert on all current deals, clear the file to `[]` and push.
 
 ## Going.com
 
 Going (formerly Scott's Cheap Flights) doesn't expose an API to subscribers —
-their team curates deals manually and delivers them via email. Keep your Going
-alerts running separately; this tool gives you daily independent coverage via
-the Amadeus flight inventory API.
+deals come via email from their team. Keep your Going alerts running separately;
+this tracker supplements them with independent daily API searches.
 
-## Adjusting search parameters
+## Adjusting parameters
 
 Edit the constants at the top of `flight_tracker/tracker.py`:
 
@@ -96,8 +96,3 @@ RET_DATES = ['2026-12-03', '2026-12-04', '2026-12-05']
 TRAVELERS = 4
 MAX_PPP   = 900
 ```
-
-> **API limit note:** The Amadeus free tier allows ~2,000 calls/month. The
-> current config runs 36 searches/day (2 origins × 2 dests × 3 dep × 3 ret),
-> using ~1,080 calls/month — well within the limit. Expanding the search
-> (more airports, more dates) may exceed the free tier.

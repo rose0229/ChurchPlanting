@@ -29,11 +29,10 @@ jobs:
 
       - name: Run flight tracker
         env:
-          AMADEUS_CLIENT_ID:     ${{ secrets.AMADEUS_CLIENT_ID }}
-          AMADEUS_CLIENT_SECRET: ${{ secrets.AMADEUS_CLIENT_SECRET }}
-          SMTP_FROM_EMAIL:       ${{ secrets.SMTP_FROM_EMAIL }}
-          SMTP_APP_PASSWORD:     ${{ secrets.SMTP_APP_PASSWORD }}
-          NOTIFY_EMAIL:          ${{ secrets.NOTIFY_EMAIL }}
+          RAPIDAPI_KEY:    ${{ secrets.RAPIDAPI_KEY }}
+          SMTP_FROM_EMAIL: ${{ secrets.SMTP_FROM_EMAIL }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+          NOTIFY_EMAIL:    ${{ secrets.NOTIFY_EMAIL }}
         run: python flight_tracker/tracker.py
 
       - name: Persist seen deals (commit back)
