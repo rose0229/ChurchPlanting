@@ -1,0 +1,45 @@
+name: Thanksgiving Japan Flight Tracker
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # 2 PM UTC = 7 AM Phoenix MST / 8 AM MDT
+  workflow_dispatch:         # run manually any time from the Actions tab
+
+jobs:
+  track-flights:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # allows committing seen_deals.json back to the branch
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: flight_tracker/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r flight_tracker/requirements.txt
+
+      - name: Run flight tracker
+        env:
+          AMADEUS_CLIENT_ID:     ${{ secrets.AMADEUS_CLIENT_ID }}
+          AMADEUS_CLIENT_SECRET: ${{ secrets.AMADEUS_CLIENT_SECRET }}
+          SMTP_FROM_EMAIL:       ${{ secrets.SMTP_FROM_EMAIL }}
+          SMTP_APP_PASSWORD:     ${{ secrets.SMTP_APP_PASSWORD }}
+          NOTIFY_EMAIL:          ${{ secrets.NOTIFY_EMAIL }}
+        run: python flight_tracker/tracker.py
+
+      - name: Persist seen deals (commit back)
+        run: |
+          git config user.name  "flight-tracker-bot"
+          git config user.email "actions@github.com"
+          git add flight_tracker/seen_deals.json
+          git diff --staged --quiet || git commit -m "chore: update seen flight deals [skip ci]"
+          git push
