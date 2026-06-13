@@ -1,0 +1,45 @@
+name: Orbit Church Sermon Sync
+
+on:
+  schedule:
+    - cron: '0 22 * * 0'   # Every Sunday at 3 PM MST (10 PM UTC)
+  workflow_dispatch:         # Run manually any time from the Actions tab
+
+jobs:
+  sync-sermon:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: sermon_sync/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r sermon_sync/requirements.txt
+
+      - name: Run sermon sync
+        env:
+          YOUTUBE_API_KEY:   ${{ secrets.YOUTUBE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_FROM_EMAIL:   ${{ secrets.SMTP_FROM_EMAIL }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+          NOTIFY_EMAIL:      ${{ secrets.NOTIFY_EMAIL }}
+        run: python sermon_sync/sermon_sync.py
+
+      - name: Save seen sermons
+        run: |
+          git config user.name  "sermon-sync-bot"
+          git config user.email "actions@github.com"
+          git add sermon_sync/seen_sermons.json
+          git diff --staged --quiet || git commit -m "chore: update seen sermons [skip ci]"
+          git push
