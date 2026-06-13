@@ -3,7 +3,7 @@
 Thanksgiving Japan Flight Tracker — Sky Scrapper / RapidAPI edition
 Searches Skyscanner data daily and emails when deals appear.
 """
-import json, os, re, smtplib
+import json, os, re, smtplib, time
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -149,6 +149,7 @@ def main():
     for origin_code in ORIGINS:
         for dest_code in DESTS:
             print(f'  {origin_code}→{dest_code} ... ', end='', flush=True)
+            time.sleep(2)
             try:
                 itineraries = search_roundtrip(origin_code, dest_code, dep_date, ret_date)
             except Exception as e:
